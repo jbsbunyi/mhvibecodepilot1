@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slumber Party</title>
+<style>
+*{box-sizing:border-box} :root{--ink:#443c56;--muted:#91899e;--purple:#7564ad;--deep:#51437e;--cream:#fffaf1;--line:#ece6ee;--yellow:#f7d77c;--green:#83bfa0}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(145deg,#514676,#9e87ba);font-family:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;color:var(--ink)}
+button{font:inherit;cursor:pointer}.phone{width:min(430px,100%);height:min(900px,100vh);background:var(--cream);position:relative;overflow:hidden;box-shadow:0 30px 80px #30274366}
+.screen{display:none;height:100%;overflow:auto;padding:20px 19px 105px;scrollbar-width:none}.screen.active{display:block}.screen::-webkit-scrollbar{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.eyebrow{font-size:11px;letter-spacing:.13em;font-weight:900;color:var(--purple);text-transform:uppercase}
+h1{margin:4px 0 0;font-size:29px;line-height:1}.icon{border:0;background:#fff;width:43px;height:43px;border-radius:50%;font-size:18px;box-shadow:0 5px 18px #53446814}
+.card{background:#fff;border-radius:22px;padding:17px;box-shadow:0 8px 24px #50406412}.hero{background:linear-gradient(145deg,#7768ad,#4f427b);color:#fff;border-radius:28px;padding:20px;box-shadow:0 16px 34px #51427b40}
+.row{display:flex;align-items:center;justify-content:space-between}.pill{font-size:10px;font-weight:900;padding:7px 10px;border-radius:20px;background:#ffffff24}
+.times{display:flex;align-items:center;margin:18px 0}.times strong{font-size:25px}.times small{display:block;opacity:.65}.line{height:1px;background:#ffffff55;flex:1;margin:0 13px;position:relative}.line:after{content:"☾";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#655797;padding:4px;color:#f8dc81}
+.stage{height:220px;position:relative;overflow:hidden;border-radius:25px;background:radial-gradient(circle at 50% 20%,#fff9 0 2%,transparent 3%),linear-gradient(#ded2ee,#f4dfdf)}
+.stage:before{content:"✦　·　✧　　✦　·　✧";position:absolute;top:20px;left:25px;color:#fff;font-size:13px;word-spacing:18px}
+.bed{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);width:245px;height:61px;border-radius:20px 20px 12px 12px;background:#d98ca4;border-bottom:14px solid #a85f7a;transition:.25s}
+.bed:before{content:"";position:absolute;width:76px;height:34px;border-radius:50%;background:#fff4dd;left:14px;top:-14px}.bed.cloud{background:#e8edf8;border-color:#bfcbe3;box-shadow:0 10px 0 #fff}.bed.moon{background:#3e396b;border-color:#28264e}.bed.hammock{background:#deb373;border-color:#9e7145;border-radius:50%}
+.sheep{position:absolute;width:140px;height:100px;left:50%;bottom:78px;transform:translateX(-50%);z-index:3;transition:.25s}.wool{position:absolute;width:103px;height:69px;left:29px;top:24px;background:#fffdf5;border-radius:50%}.wool:before,.wool:after{content:"";position:absolute;width:52px;height:52px;border-radius:50%;background:#fffdf5}.wool:before{left:-18px;top:4px}.wool:after{right:-12px;top:-9px}
+.face{position:absolute;width:54px;height:59px;left:8px;top:29px;border-radius:45%;background:#b7a0c7;z-index:2}.face:before{content:"•  •";position:absolute;top:18px;left:10px;color:#443953;font-size:17px;letter-spacing:8px}.ear{position:absolute;width:25px;height:13px;background:#9b7fad;border-radius:70% 20%;left:-7px;top:9px;transform:rotate(15deg)}.ear.r{left:39px;transform:scaleX(-1) rotate(15deg)}
+.layer{display:none;position:absolute;z-index:6}.layer.on{display:block}.head{font-size:43px;left:-1px;top:-12px}.eyes{font-size:31px;left:7px;top:23px}.neck{font-size:30px;left:34px;top:55px}.feet{font-size:25px;left:47px;top:75px;letter-spacing:17px}.friend{font-size:38px;right:-35px;top:40px}.held{font-size:28px;left:50px;top:48px}
+.pajama{display:none;position:absolute;width:90px;height:51px;left:39px;top:39px;border-radius:45%;background:repeating-linear-gradient(45deg,#86a9ce 0 8px,#d8e4f2 8px 16px);z-index:4}.pajama.on{display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;background:#ffffff18;border-radius:17px;padding:11px 3px}.stats b{display:block}.stats small{font-size:9px;opacity:.7}.primary{width:100%;border:0;border-radius:16px;padding:14px;background:var(--yellow);color:#4e4269;font-weight:900;margin-top:13px;box-shadow:0 6px 0 #cbaa52}
+.section{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 11px}.section h2{font-size:19px;margin:0}.section span{font-size:11px;color:var(--purple);font-weight:900}
+.schedule{display:flex;gap:12px;align-items:center}.schedule+.schedule{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}.round{width:41px;height:41px;border-radius:14px;background:#eee9f8;display:grid;place-items:center}.copy{flex:1}.copy b{display:block;font-size:13px}.copy small{color:var(--muted)}.value{font-weight:900;color:var(--purple);font-size:13px}
+.closet-stage{position:relative}.closet-stage .level{position:absolute;z-index:8;top:13px;left:13px;background:#fff;padding:8px 11px;border-radius:25px;font-size:10px;font-weight:900}.look-name{position:absolute;z-index:8;bottom:12px;right:12px;background:#4c406fcc;color:#fff;padding:8px 11px;border-radius:25px;font-size:10px;font-weight:900}
+.progress{margin:14px 2px}.progress-row{display:flex;justify-content:space-between;font-size:11px;font-weight:900}.bar{height:7px;background:#e8e2ea;border-radius:10px;margin-top:7px;overflow:hidden}.bar i{display:block;width:68%;height:100%;background:linear-gradient(90deg,#9a82c5,#f1ab9a)}
+.filters{display:flex;gap:7px;overflow:auto;margin:15px 0 12px;scrollbar-width:none}.filter{border:0;border-radius:25px;padding:9px 13px;background:#ede8ee;color:var(--muted);white-space:nowrap;font-size:11px;font-weight:900}.filter.active{color:#fff;background:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.item{border:2px solid transparent;background:#fff;border-radius:18px;padding:12px 5px 10px;text-align:center;min-height:100px;position:relative}.item.selected{border-color:var(--purple);background:#f5f1ff}.item.locked{opacity:.55}.item.hide{display:none}.item .emoji{font-size:34px;height:43px}.item b{display:block;font-size:10px}.item small{font-size:8px;color:var(--muted)}.tag{position:absolute;top:5px;right:5px;font-size:8px;padding:3px 5px;border-radius:10px;background:#f4d986}.lock{position:absolute;top:7px;right:7px;font-size:10px}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:86px;background:#fffffff5;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 10px 20px;z-index:30}.tab{border:0;background:none;color:#aaa3b1;font-size:9px;font-weight:900}.tab span{display:block;font-size:21px;margin-bottom:2px}.tab.active{color:var(--purple)}
+.rank{display:flex;align-items:center;gap:11px;padding:11px}.rank+.rank{border-top:1px solid var(--line)}.avatar{width:43px;height:43px;border-radius:50%;background:#f0e6dc;display:grid;place-items:center;font-size:24px}.rank .copy{font-size:12px}.hours{font-size:12px;font-weight:900;color:var(--purple)}
+.toggle{border:0;width:46px;height:27px;border-radius:20px;background:#d5ced9;position:relative}.toggle:after{content:"";position:absolute;width:21px;height:21px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s}.toggle.on{background:var(--green)}.toggle.on:after{left:22px}.setting{display:flex;align-items:center;gap:11px}.setting+.setting{margin-top:15px;padding-top:15px;border-top:1px solid var(--line)}
+.toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,15px);opacity:0;z-index:80;background:#43385d;color:#fff;padding:10px 15px;border-radius:25px;white-space:nowrap;font-size:11px;font-weight:900;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.sleep{display:none;position:absolute;inset:0;z-index:70;background:linear-gradient(#282047,#514279);color:#fff;text-align:center;padding:70px 30px}.sleep.open{display:block}.sleep .moon{font-size:90px;margin:35px}.sleep p{opacity:.7;font-size:13px;line-height:1.6}
+@media(min-width:431px){.phone{border:8px solid #28232e;border-radius:38px;height:min(890px,96vh)}.tabs{border-radius:0 0 29px 29px}}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<section class="screen" id="tonight">
+  <div class="top"><div><div class="eyebrow">Sunday, November 1</div><h1>Good evening</h1></div><button class="icon" onclick="toast('No new notifications')">🔔</button></div>
+  <div class="hero">
+    <div class="row"><div><small>TONIGHT'S SLUMBER</small><br><b>Ready for bed?</b></div><span class="pill">🔥 6 night streak</span></div>
+    <div class="times"><div><strong>10:30</strong><small>PM · bedtime</small></div><div class="line"></div><div style="text-align:right"><strong>7:00</strong><small>AM · alarm</small></div></div>
+    <div class="stage" style="height:170px;background:transparent">
+      <div class="bed"></div>
+      <div class="sheep">
+        <div class="wool"></div><div class="pajama"></div>
+        <div class="face"><i class="ear"></i><i class="ear r"></i><span class="layer head"></span><span class="layer eyes"></span></div>
+        <span class="layer neck"></span><span class="layer feet"></span><span class="layer friend"></span><span class="layer held"></span>
+      </div>
+    </div>
+    <div class="stats"><div><b>8h 24m</b><small>LAST NIGHT</small></div><div><b>8h 03m</b><small>WEEKLY AVG</small></div><div><b>#4</b><small>FRIENDS</small></div></div>
+    <button class="primary" onclick="document.querySelector('.sleep').classList.add('open')">Check in for bedtime ☾</button>
+  </div>
+  <div class="section"><h2>Your schedule</h2><span>EDIT</span></div>
+  <div class="card">
+    <div class="schedule"><div class="round">🌙</div><div class="copy"><b>Wind down</b><small>Quiet notifications</small></div><div class="value">10:00 PM</div></div>
+    <div class="schedule"><div class="round">⏰</div><div class="copy"><b>Morning alarm</b><small>Dreamy bells</small></div><div class="value">7:00 AM</div></div>
+  </div>
+</section>
+
+<section class="screen" id="party">
+  <div class="top"><div><div class="eyebrow">Weekly competition</div><h1>Slumber Party</h1></div><button class="icon" onclick="toast('Invite link copied!')">＋</button></div>
+  <div class="hero" style="text-align:center">
+    <span class="pill">🏆 Dreamy League · 2 days left</span>
+    <div style="font-size:70px;margin:24px 0 5px">🐑 👑</div>
+    <h2 style="margin:0">You climbed 2 places!</h2><p style="font-size:12px;opacity:.75">33 more minutes to reach the top three.</p>
+  </div>
+  <div class="section"><h2>Leaderboard</h2><span>56H 21M</span></div>
+  <div class="card">
+    <div class="rank"><b>1</b><div class="avatar">🐑</div><div class="copy"><b>Leo</b><small>9-night streak</small></div><div class="hours">59h 18m</div></div>
+    <div class="rank"><b>2</b><div class="avatar">🐑</div><div class="copy"><b>Maya</b><small>7-night streak</small></div><div class="hours">57h 42m</div></div>
+    <div class="rank"><b>3</b><div class="avatar">🐏</div><div class="copy"><b>Amir</b><small>4-night streak</small></div><div class="hours">56h 54m</div></div>
+    <div class="rank" style="background:#f3eefb;border-radius:14px"><b>4</b><div class="avatar">🐑</div><div class="copy"><b>You</b><small>6-night streak</small></div><div class="hours">56h 21m</div></div>
+  </div>
+</section>
+
+<section class="screen active" id="closet">
+  <div class="top"><div><div class="eyebrow">72 collectibles</div><h1>Dream Closet</h1></div><button class="icon" onclick="toast('Look saved!')">✓</button></div>
+  <div class="closet-stage">
+    <div class="stage">
+      <div class="level">⭐ Level 12 · Luna</div>
+      <div class="bed" id="previewBed"></div>
+      <div class="sheep">
+        <div class="wool"></div><div class="pajama" id="pajama"></div>
+        <div class="face"><i class="ear"></i><i class="ear r"></i><span class="layer head" id="head"></span><span class="layer eyes" id="eyes"></span></div>
+        <span class="layer neck" id="neck"></span><span class="layer feet" id="feet"></span><span class="layer friend" id="friend"></span><span class="layer held" id="held"></span>
+      </div>
+      <div class="look-name" id="lookName">Cozy Classic</div>
+    </div>
+  </div>
+  <div class="progress"><div class="progress-row"><span>Collection progress</span><span>49 / 72</span></div><div class="bar"><i></i></div></div>
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="head">Headwear</button>
+    <button class="filter" data-filter="eyes">Masks</button>
+    <button class="filter" data-filter="pajama">Pajamas</button>
+    <button class="filter" data-filter="bed">Beds</button>
+    <button class="filter" data-filter="feet">Slippers</button>
+    <button class="filter" data-filter="neck">Neckwear</button>
+    <button class="filter" data-filter="friend">Buddies</button>
+    <button class="filter" data-filter="held">Extras</button>
+  </div>
+  <div class="grid" id="items">
+    <button class="item selected" data-cat="all" data-layer="reset" data-name="Cozy Classic"><div class="emoji">✨</div><b>Cozy Classic</b><small>Equipped</small></button>
+
+    <button class="item" data-cat="head" data-layer="head" data-value="🌙" data-name="Moon Cap"><div class="emoji">🌙</div><b>Moon Cap</b><small>Top 10 reward</small></button>
+    <button class="item" data-cat="head" data-layer="head" data-value="👑" data-name="Dream Crown"><span class="tag">RARE</span><div class="emoji">👑</div><b>Dream Crown</b><small>League champion</small></button>
+    <button class="item" data-cat="head" data-layer="head" data-value="🎀" data-name="Bedtime Bow"><div class="emoji">🎀</div><b>Bedtime Bow</b><small>3-night streak</small></button>
+    <button class="item" data-cat="head" data-layer="head" data-value="🎩" data-name="Nightcap"><div class="emoji">🎩</div><b>Velvet Nightcap</b><small>Level 14</small></button>
+
+    <button class="item" data-cat="eyes" data-layer="eyes" data-value="😴" data-name="Starry Mask"><div class="emoji">😴</div><b>Starry Mask</b><small>6-night streak</small></button>
+    <button class="item" data-cat="eyes" data-layer="eyes" data-value="🕶️" data-name="Midnight Shades"><div class="emoji">🕶️</div><b>Midnight Shades</b><small>Night owl set</small></button>
+    <button class="item" data-cat="eyes" data-layer="eyes" data-value="💜" data-name="Lavender Mask"><div class="emoji">💜</div><b>Lavender Mask</b><small>Level 8</small></button>
+
+    <button class="item" data-cat="pajama" data-layer="pajama" data-name="Cloud Pajamas"><div class="emoji">🩵</div><b>Cloud Pajamas</b><small>Level 10</small></button>
+    <button class="item" data-cat="pajama" data-layer="pajama" data-name="Striped Onesie"><div class="emoji">🧸</div><b>Striped Onesie</b><small>8-hour sleeper</small></button>
+    <button class="item locked" data-cat="pajama"><span class="lock">🔒</span><div class="emoji">🌌</div><b>Galaxy Onesie</b><small>30-day streak</small></button>
+
+    <button class="item" data-cat="bed" data-layer="bed" data-value="cloud" data-name="Cloud Nine Bed"><span class="tag">EPIC</span><div class="emoji">☁️</div><b>Cloud Nine</b><small>Top 3 reward</small></button>
+    <button class="item" data-cat="bed" data-layer="bed" data-value="moon" data-name="Moon Cradle"><div class="emoji">🌙</div><b>Moon Cradle</b><small>Level 16</small></button>
+    <button class="item" data-cat="bed" data-layer="bed" data-value="hammock" data-name="Cozy Hammock"><div class="emoji">🏕️</div><b>Cozy Hammock</b><small>Weekend reward</small></button>
+    <button class="item locked" data-cat="bed"><span class="lock">🔒</span><div class="emoji">🏰</div><b>Dream Castle</b><small>Diamond League</small></button>
+
+    <button class="item" data-cat="feet" data-layer="feet" data-value="🐰" data-name="Bunny Slippers"><div class="emoji">🐰</div><b>Bunny Slippers</b><small>Level 7</small></button>
+    <button class="item" data-cat="feet" data-layer="feet" data-value="☁️" data-name="Cloud Slippers"><div class="emoji">☁️</div><b>Cloud Slippers</b><small>5 perfect nights</small></button>
+    <button class="item" data-cat="feet" data-layer="feet" data-value="🦄" data-name="Unicorn Slippers"><div class="emoji">🦄</div><b>Unicorn Slippers</b><small>Seasonal</small></button>
+
+    <button class="item" data-cat="neck" data-layer="neck" data-value="🧣" data-name="Cozy Scarf"><div class="emoji">🧣</div><b>Cozy Scarf</b><small>Level 5</small></button>
+    <button class="item" data-cat="neck" data-layer="neck" data-value="🔔" data-name="Dream Bell"><div class="emoji">🔔</div><b>Dream Bell</b><small>Morning master</small></button>
+    <button class="item" data-cat="neck" data-layer="neck" data-value="🌸" data-name="Lavender Garland"><div class="emoji">🌸</div><b>Lavender Garland</b><small>Spring reward</small></button>
+
+    <button class="item" data-cat="friend" data-layer="friend" data-value="🧸" data-name="Teddy Buddy"><div class="emoji">🧸</div><b>Teddy Buddy</b><small>7-night streak</small></button>
+    <button class="item" data-cat="friend" data-layer="friend" data-value="🐇" data-name="Moon Bunny"><div class="emoji">🐇</div><b>Moon Bunny</b><small>Invite 2 friends</small></button>
+    <button class="item locked" data-cat="friend"><span class="lock">🔒</span><div class="emoji">🐉</div><b>Dream Dragon</b><small>100 hours slept</small></button>
+
+    <button class="item" data-cat="held" data-layer="held" data-value="📖" data-name="Storybook"><div class="emoji">📖</div><b>Storybook</b><small>Wind-down reward</small></button>
+    <button class="item" data-cat="held" data-layer="held" data-value="🫖" data-name="Sleepy Tea"><div class="emoji">🫖</div><b>Sleepy Tea</b><small>Level 9</small></button>
+    <button class="item" data-cat="held" data-layer="held" data-value="⭐" data-name="Wish Star"><span class="tag">NEW</span><div class="emoji">⭐</div><b>Wish Star</b><small>Weekly challenge</small></button>
+  </div>
+</section>
+
+<section class="screen" id="setup">
+  <div class="top"><div><div class="eyebrow">Make it yours</div><h1>Sleep setup</h1></div><button class="icon" onclick="toast('Settings saved')">✓</button></div>
+  <div class="hero"><div class="row"><div><small>HOME SCREEN WIDGET</small><h2>Bedtime in 1h 42m</h2><small>10:30 PM → 7:00 AM</small></div><div style="font-size:50px">🐑</div></div></div>
+  <div class="section"><h2>Phone experience</h2></div>
+  <div class="card">
+    <div class="setting"><div class="round">📱</div><div class="copy"><b>Home screen widget</b><small>Schedule, streak, and ranking</small></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="setting"><div class="round">🔐</div><div class="copy"><b>Slumber lock screen</b><small>Night clock and sleeping sheep</small></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="setting"><div class="round">🛡️</div><div class="copy"><b>Sleep Shield</b><small>Pause distracting apps at bedtime</small></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="setting"><div class="round">🎵</div><div class="copy"><b>Wake-up alarm</b><small>Dreamy bells · Gradual volume</small></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+  </div>
+</section>
+
+<nav class="tabs">
+  <button class="tab" data-page="tonight"><span>☾</span>Tonight</button>
+  <button class="tab" data-page="party"><span>🏆</span>Party</button>
+  <button class="tab active" data-page="closet"><span>🐑</span>Closet</button>
+  <button class="tab" data-page="setup"><span>⚙</span>Setup</button>
+</nav>
+
+<div class="sleep"><div class="eyebrow" style="color:#d8c9ff">SLEEP SHIELD ACTIVE</div><div class="moon">☾</div><h1>Sweet dreams</h1><p>Your check-in is complete. Distracting apps are paused until your 7:00 AM alarm.</p><div style="font-size:75px">🐑</div><button class="primary" style="margin-top:50px" onclick="this.parentElement.classList.remove('open');toast('8h 31m added to your score!')">I'm awake ☀️</button></div>
+<div class="toast" id="toast">Saved</div>
+</div>
+
+<script>
+const layers=["head","eyes","neck","feet","friend","held"];
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),1600)}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab,.screen").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.page).classList.add("active")});
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");const f=b.dataset.filter;document.querySelectorAll(".item").forEach(i=>i.classList.toggle("hide",f!=="all"&&i.dataset.cat!==f))});
+document.querySelectorAll(".item").forEach(item=>item.onclick=()=>{
+  if(item.classList.contains("locked")){toast("Keep sleeping well to unlock this!");return}
+  const layer=item.dataset.layer,name=item.dataset.name;
+  if(layer==="reset"){
+    layers.forEach(id=>{const x=document.getElementById(id);x.textContent="";x.classList.remove("on")});
+    document.getElementById("pajama").classList.remove("on");document.getElementById("previewBed").className="bed";
+    document.querySelectorAll(".item").forEach(x=>x.classList.remove("selected"));item.classList.add("selected");
+  }else{
+    document.querySelectorAll(`.item[data-layer="${layer}"]`).forEach(x=>x.classList.remove("selected"));item.classList.add("selected");
+    if(layer==="bed"){document.getElementById("previewBed").className="bed "+item.dataset.value}
+    else if(layer==="pajama"){document.getElementById("pajama").classList.add("on")}
+    else{const x=document.getElementById(layer);x.textContent=item.dataset.value;x.classList.add("on")}
+  }
+  document.getElementById("lookName").textContent=name;toast(name+" equipped");
+});
+</script>
+</body>
+</html>
